@@ -1,0 +1,8 @@
+<div class="total-price">
+    <h1>Cena w sumie: {{total}}{{currencyService.currency}}</h1>
+</div>
+<div id="content">
+    <div *ngFor="let dish of this.dishes">
+        <app-dish-card [dish]="dish" [hasMaxPrice]="false" [hasMinPrice]="false" [isEditable]="false"></app-dish-card>
+    </div>
+</div>

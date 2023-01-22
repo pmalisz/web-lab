@@ -1,0 +1,35 @@
+.total-ordered{
+    display: flex;
+    justify-content: center;
+    margin: 1rem
+}
+
+#content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1rem;
+}
+
+.slider {
+    background-color: transparent;
+    border: unset;
+    color: white;
+  }
+
+  .paginator {
+    position: relative;
+    margin: 30px;
+    font-size: 45px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .page-sizer {
+    font-size: 14px;
+    position: absolute;
+    right: 150px;
+  }

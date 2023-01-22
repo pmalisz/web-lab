@@ -1,0 +1,32 @@
+<div class="dish-view-container">
+    <div class="dish-view">
+        <div class="dish-view-img">
+            <img [src]="imgUrl">
+            <a class="prev" (click)="prev()">❮</a>
+            <a class="next" (click)="next()">❯</a>
+        </div>
+        <div class="dish-view-body">
+            <h1>{{dish.name | uppercase}}</h1>
+            <p>{{dish.description}}</p>
+            <ul>
+            <li>Kuchnia: {{dish.cuisineType | uppercase}}</li>
+            <li>Rodzaj: {{dish.category}}</li>
+            <li>Składniki: {{dish.ingredients}}</li>
+            <li>Cena: {{dish.price}}{{currencyService.currency}}</li>
+            <li>Pozostalo: {{dish.remaining}}</li>
+            </ul>
+        </div>
+        <div class="dish-view-body" *ngIf="dish.remaining === 0">
+        <h1 *ngIf="dish.remaining === 0">NIEDOSTĘPNE</h1>
+        </div> <hr/>
+        <div class="dish-view-footer">
+            <div class="dish-view-footer-btn">
+                <button (click)="subFromOrder(dish)" class="custom-btn square-btn" *ngIf="dish.maxPerDay > dish.remaining">-</button>
+                <button (click)="addToOrder(dish)" class="custom-btn square-btn" *ngIf="dish.remaining > 0">+</button>
+            </div>
+            <div class="dish-view-footer-info">
+                <p>Wybrano: {{dish.maxPerDay - dish.remaining}}</p>
+            </div>
+        </div>
+    </div>
+</div>

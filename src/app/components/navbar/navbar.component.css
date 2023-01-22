@@ -1,0 +1,23 @@
+#navbar {
+    display: flex;
+    justify-content:space-between;
+    margin-bottom: 1rem;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    background-color: #e4dfda;
+}
+
+.logo {
+    display: flex;
+}
+
+button {
+    font-size: 1.2rem;
+    width: 7rem;
+}
+
+.buttons, .logo{
+    gap: .5rem;
+    display: flex;
+}

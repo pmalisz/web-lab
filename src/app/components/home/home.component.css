@@ -1,0 +1,27 @@
+.business-card, .contact {
+  padding: 1.5rem;
+  width: 100%;
+  margin-top: 5rem;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+p {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+iframe {
+  width: 40rem;
+  height: 30rem;
+}
+
+@media only screen and (max-width: 768px) {
+  iframe {
+    width: 20rem;
+    height: 15rem;
+  }
+}

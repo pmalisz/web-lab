@@ -1,0 +1,12 @@
+.total-price {
+    display: flex;
+    justify-content: center;
+}
+
+#content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1rem;
+}

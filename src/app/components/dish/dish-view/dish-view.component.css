@@ -1,0 +1,134 @@
+.dish-view-container {
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.dish-view {
+    display: flex;
+    flex-direction: column;
+    width: 60rem;
+    height: 60rem;
+    border-radius: .4rem .4rem;
+    box-shadow: .2rem .2rem .6rem .2rem #aaaaaa;
+    background-color: whitesmoke;
+}
+
+.dish-view-img {
+    position: relative;
+    height: 35%;
+    width: 100%;
+    background-color: blue;
+    border-radius: .4rem .4rem 0 0;
+}
+
+.dish-view-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: .4rem .4rem 0 0;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.dish-view-body {
+    text-align: center;
+    height: 50%;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.dish-view-body h1{
+    font-size: 3rem;
+    color: rgb(75, 75, 75);
+    margin-bottom: 0;
+}
+
+.dish-view-body p{
+    font-size: 2rem;
+    color: rgb(255, 110, 110);
+    margin-top: .2rem;
+}
+
+.dish-view-body ul {
+    padding: 0;
+    list-style: none;
+}
+
+.dish-view-body ul li {
+    font-size: 2rem;
+    padding-top: 0.2rem;
+}
+
+hr {
+    margin: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dish-view-footer {
+    height: 15%;
+    border-radius: 0 0 .4rem .4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: .5rem;
+}
+
+.dish-view-footer-btn {
+    display: flex;
+    gap: .5rem;
+}
+
+.square-btn {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.dish-view-footer-info {
+    text-align: right;
+    color: #666666;
+}
+
+.small-amount{
+    background-color: rgb(252, 211, 211);
+}
+
+.max-price{
+    border: .3rem solid green;
+}
+
+.min-price{
+    border: .3rem solid red;
+}
+
+ngb-rating {
+    color: #FFC107;
+    font-size: 2rem;
+}

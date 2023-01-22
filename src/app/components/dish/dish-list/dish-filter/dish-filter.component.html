@@ -1,0 +1,19 @@
+<ul class="list-group filter-input-container"> 
+    <li class="list-group-item" *ngFor="let item of dropdownListsObj | keyvalue">
+      <div class="select">
+        <ng-multiselect-dropdown
+          class="dropdown"
+          [placeholder]="item.key"
+          [settings]="dropdownSettings"
+          [data]="getData(item.key)"
+          [(ngModel)]="selectedItemsObj[item.key]"
+          (onSelect)="onFilterChange($event)"
+          (onDeSelect)="onFilterChange($event)"
+          (onSelectAll)="onFilterChange($event)"
+          (onDeSelectAll)="onFilterChange($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+    </li>
+  </ul>
+    
