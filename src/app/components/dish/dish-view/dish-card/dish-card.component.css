@@ -1,9 +1,16 @@
 .card {
     width: 22rem;
-    height: 28rem;
     border-radius: .4rem .4rem;
     box-shadow: .2rem .2rem .6rem .2rem #aaaaaa;
     background-color: whitesmoke;
+}
+
+.card-big {
+    height: 28rem;
+}
+
+.card-small {
+    height: 20rem;
 }
 
 .card-img {
@@ -21,7 +28,7 @@
 }
 
 .card-body {
-    height: 40%;
+    height: 50%;
     padding: 1rem;
     overflow-y: auto;
 }
@@ -60,7 +67,7 @@ hr {
 }
 
 .card-footer {
-    height: 15%;
+    height: 20%;
     border-radius: 0 0 .4rem .4rem;
     display: flex;
     align-items: center;

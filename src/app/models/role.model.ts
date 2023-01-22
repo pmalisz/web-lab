@@ -1,5 +1,5 @@
 export interface Role {
-    Customer: boolean,
-    Manager: boolean,
-    Admin: boolean,
+    customer: boolean,
+    manager: boolean,
+    admin: boolean,
 }

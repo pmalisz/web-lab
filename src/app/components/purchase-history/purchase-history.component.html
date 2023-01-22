@@ -1,0 +1,22 @@
+<div id="content">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Danie</th>
+                <th scope="col">Ile</th>
+                <th scope="col">Cena</th>
+                <th scope="col">Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dish of this.purchases; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ dish.name }}</td>
+                <td>{{ dish.count | number }}</td>
+                <td>{{ dish.price| number }}{{currencyService.currency}}</td>
+                <td>{{ dish.seconds * 1000 | date:'dd/MM/yyyy h:mm:ss a'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

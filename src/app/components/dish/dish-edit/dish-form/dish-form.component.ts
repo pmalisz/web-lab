@@ -1,28 +1,35 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Dish } from 'src/app/models/dish.model';
 import { CurrencyService } from 'src/app/services/currency.service';
 import { DishService } from 'src/app/services/dish.service';
 
 @Component({
-  selector: 'app-dish-add',
-  templateUrl: './dish-add.component.html',
-  styleUrls: ['./dish-add.component.css']
+  selector: 'app-dish-form',
+  templateUrl: './dish-form.component.html',
+  styleUrls: ['./dish-form.component.css']
 })
-export class DishAddComponent {
+export class DishFormComponent {
+  dish!: Dish;
+  editMode: boolean = false;
   modelForm!: FormGroup;
   formErrors:Map<string, string>;
   validationMessages:Map<string, Map<string, string>>;
+  subscriptions: Subscription;
 
-  constructor(private formBuilder: FormBuilder, private dishService: DishService, public currencyService: CurrencyService) {
+  constructor(private formBuilder: FormBuilder,
+              private dishService: DishService,
+              public currencyService: CurrencyService,
+              private route: ActivatedRoute) {
     this.formErrors = new Map([
       ['name', ''],
       ['ingredients', ''],
       ['maxPerDay', ''],
       ['price', ''],
       ['imgUrls', ''],
-    ])
-
+    ]);
 
     this.validationMessages = new Map([
       ['name', new Map([['required', 'Nazwa jest wymagana']])],
@@ -33,9 +40,19 @@ export class DishAddComponent {
                             ['min', 'Minimalna cena to 1$']])],
       ['imgUrls', new Map([['required', 'Link do zdjęć jest wymagany']])],
     ]);
+
+    this.subscriptions = new Subscription();
   }
 
   ngOnInit(): void {
+    if(this.route.snapshot.params["id"]){
+      this.subscriptions.add(this.dishService.dishesSubject.subscribe(() => {        
+          this.dish = this.dishService.getDish(this.route.snapshot.params["id"]);
+      }));
+      
+      this.editMode = true;
+    }
+
     this.modelForm = this.formBuilder.group({
       name: ['', Validators.required],
       cuisineType: '',
@@ -55,21 +72,26 @@ export class DishAddComponent {
   }
 
   onSubmit(form: FormGroup) {
-    const newDish: Dish = {
-      name: form.value.name,
-      cuisineType: form.value.cuisineType,
-      category: form.value.category,
-      ingredients: form.value.ingredients,
-      maxPerDay: form.value.maxPerDay,
-      remaining: form.value.maxPerDay,
-      price: form.value.price,
-      description: form.value.description,
-      imgUrls: form.value.imgUrls.replace(/\s/g, "").split(',')
-    }
-
     if (form.valid) {
-      this.dishService.addDish(newDish);
-      form.reset();
+      if(this.editMode){
+        this.dishService.editDish(this.dish);
+      }else{
+        const newDish: Dish = {
+          name: form.value.name,
+          cuisineType: form.value.cuisineType,
+          category: form.value.category,
+          ingredients: form.value.ingredients,
+          maxPerDay: form.value.maxPerDay,
+          remaining: form.value.maxPerDay,
+          price: form.value.price,
+          description: form.value.description,
+          imgUrls: form.value.imgUrls.replace(/\s/g, "").split(','),
+          rate: 0
+        }
+
+        this.dishService.addDish(newDish);
+        form.reset();
+      }
     } else {
       this.validate();
     }

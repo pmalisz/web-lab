@@ -1,11 +1,42 @@
-<div id="navbar">
-    <div class="logo">
-        <button class="custom-btn" (click)="navToMainMenu()">Strona główna</button>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <div>
+            <a class="navbar-brand" routerLink="" routerLinkActive="active" href="#">Strona główna</a>
+            <a class="navbar-brand" routerLink="dish-list" routerLinkActive="active" href="#">Menu</a>
+        </div>
+
+        <button class="navbar-toggler" type="button" (click)="basicNavbar.toggle()" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" mdbCollapse #basicNavbar="mdbCollapse">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li *ngIf="authService.isLoggedIn" class="nav-item">
+                    <app-currency></app-currency>
+                </li>
+                <li *ngIf="authService.isManager" class="nav-item">
+                    <a class="nav-link" routerLink="dish-edit" href="#">Edytuj menu</a>
+                </li>
+                <li *ngIf="authService.isLoggedIn" class="nav-item">
+                    <a class="nav-link" routerLink="purchase-history" href="#">Historia zakupów</a>
+                </li>
+                <li *ngIf="authService.isLoggedIn" class="nav-item">
+                    <a class="nav-link" routerLink="cart" href="#">Koszyk</a>
+                </li>
+                <li *ngIf="authService.isAdmin" class="nav-item">
+                    <a class="nav-link" routerLink="admin-panel" href="#">Panel admina</a>
+                </li>
+                <li *ngIf="authService.isLoggedIn" class="nav-item">
+                    <a class="nav-link" (click)="authService.signOut()" href="#">Wyloguj się</a>
+                </li>
+                <li *ngIf="!authService.isLoggedIn" class="nav-item">
+                    <a class="nav-link" routerLink="sign-in" href="#">Zaloguj się</a>
+                </li>
+                <li *ngIf="!authService.isLoggedIn" class="nav-item">
+                    <a class="nav-link" routerLink="sign-up" href="#">Zarejestruj się</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="buttons">
-        <app-currency></app-currency>
-        <button class="custom-btn" (click)="navToMenu()">Menu</button>
-        <button class="custom-btn" (click)="navToDishForm()">Dodaj danie</button>
-        <button class="custom-btn" (click)="navToCart()">Koszyk</button>
-    </div>
-</div>
+</nav>

@@ -1,0 +1,70 @@
+<form [formGroup]="modelForm" (ngSubmit)="onSubmit(modelForm)">
+    <div class="form-group">
+        <label>Nazwa dania: </label>
+        <div class="input-container">
+            <input *ngIf="!editMode" class="form-control" type="text" name="name" formControlName="name" />
+            <input *ngIf="editMode" [(ngModel)]="dish.name" class="form-control" type="text" name="name" formControlName="name" />
+            <span *ngIf="formErrors.get('name')">
+                {{ formErrors.get("name") }}
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Rodzaj kuchni: </label>
+        <input *ngIf="!editMode" class="form-control" type="text" name="cuisineType" formControlName="cuisineType" />
+        <input *ngIf="editMode" [(ngModel)]="dish.cuisineType" class="form-control" type="text" name="cuisineType" formControlName="cuisineType" />
+    </div>
+    <div class="form-group">
+        <label>Kategoria: </label>
+        <input *ngIf="!editMode" class="form-control" type="text" name="category" formControlName="category" />
+        <input *ngIf="editMode" [(ngModel)]="dish.category" class="form-control" type="text" name="category" formControlName="category" />
+    </div>
+    <div class="form-group">
+        <label>Składniki: </label>
+        <div class="input-container">
+            <input *ngIf="!editMode" class="form-control" type="text" name="ingredients" formControlName="ingredients" />
+            <input *ngIf="editMode" [(ngModel)]="dish.ingredients" class="form-control" type="text" name="ingredients" formControlName="ingredients" />
+            <span *ngIf="formErrors.get('ingredients')">
+                {{ formErrors.get("ingredients") }}
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Ilość na dzień: </label>
+        <div class="input-container">
+            <input *ngIf="!editMode" class="form-control" type="number" name="maxPerDay" formControlName="maxPerDay" />
+            <input *ngIf="editMode" [(ngModel)]="dish.maxPerDay" class="form-control" type="number" name="maxPerDay" formControlName="maxPerDay" />
+            <span *ngIf="formErrors.get('maxPerDay')">
+                {{ formErrors.get("maxPerDay") }}
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Cena ({{currencyService.currency}}): </label>
+        <div class="input-container">
+            <input *ngIf="!editMode" class="form-control" type="number" name="price" formControlName="price" />
+            <input *ngIf="editMode" [(ngModel)]="dish.price" class="form-control" type="number" name="price" formControlName="price" />
+            <span *ngIf="formErrors.get('price')">
+                {{ formErrors.get("price") }}
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Opis: </label>
+        <input *ngIf="!editMode" class="form-control" type="text" name="description" formControlName="description" />
+        <input *ngIf="editMode" [(ngModel)]="dish.description" class="form-control" type="text" name="description" formControlName="description" />
+    </div>
+    <div class="form-group">
+        <label>Linki do obrazów (rozdzielone ','):</label>
+        <div class="input-container">
+            <input *ngIf="!editMode" class="form-control" type="url" name="imgUrls" formControlName="imgUrls" />
+            <input *ngIf="editMode" [(ngModel)]="dish.imgUrls" class="form-control" type="url" name="imgUrls" formControlName="imgUrls" />
+            <span *ngIf="formErrors.get('imgUrls')">
+                {{ formErrors.get("imgUrls") }}
+            </span>
+        </div>
+    </div>
+    <input *ngIf="!editMode" class="form-control" type="submit" class="custom-btn" value="Dodaj danie" />
+    <input *ngIf="editMode" class="form-control" type="submit" class="custom-btn" value="Zapisz zmiany" />
+</form>
+  

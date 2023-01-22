@@ -1,19 +1,19 @@
-<div class="card" [ngClass]="{ 'max-price': hasMaxPrice, 'min-price': hasMinPrice}">
+<div class="card" [ngClass]="{ 'max-price': hasMaxPrice && isEditable, 'min-price': hasMinPrice && isEditable, 'card-big': isEditable, 'card-small': !isEditable}">
     <div class="card-img">
         <picture>
             <img [src]="dish.imgUrls[0]"  (click)="navToDishView()">
         </picture>
     </div>
-    <div class="card-body" [ngClass]="{'small-amount': dish.remaining <= 3}" *ngIf="dish.remaining > 0">
+    <div class="card-body" [ngClass]="{'small-amount': dish.remaining <= 3 && isEditable}" *ngIf="dish.remaining > 0 || !isEditable">
         <h1>{{dish.name | uppercase}}</h1>
         <ul>
             <li>Kuchnia: {{dish.cuisineType | uppercase}}</li>
             <li>Cena: {{dish.price}}{{currencyService.currency}}</li>
-            <li>Pozostalo: {{dish.remaining}}</li>
+            <li *ngIf="isEditable">Pozostalo: {{dish.remaining}}</li>
         </ul>
     </div>
-    <div class="card-body" *ngIf="dish.remaining === 0">
-    <h1 *ngIf="dish.remaining === 0">NIEDOSTĘPNE</h1>
+    <div class="card-body" *ngIf="dish.remaining === 0 && isEditable">
+        <h1>NIEDOSTĘPNE</h1>
     </div> <hr/>
     <div class="card-footer">
         <div class="card-footer-btn" *ngIf="isEditable">
@@ -22,11 +22,6 @@
         </div>
         <div class="card-footer-info">
             <p>Wybrano: {{dish.maxPerDay - dish.remaining}}</p>
-        </div>
-    </div> <hr/>
-    <div class="card-footer" *ngIf="isEditable">
-        <div class="card-footer-btn">
-            <button (click)="deleteDish(dish)" class="custom-btn">Usuń</button>
         </div>
     </div>
 </div>

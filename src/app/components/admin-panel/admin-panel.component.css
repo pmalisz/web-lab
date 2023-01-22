@@ -1,0 +1,15 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.persistance {
+    font-size: 1.5rem;
+    width: 20rem;
+}
+
+.roles {
+    display: flex;
+    flex-direction: column;
+}

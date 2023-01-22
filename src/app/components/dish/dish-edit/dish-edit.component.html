@@ -1,0 +1,33 @@
+<div id="content">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Danie</th>
+                <th scope="col">Kuchnia</th>
+                <th scope="col">Kategoria</th>
+                <th scope="col">Ilość na dzień</th>
+                <th scope="col">Cena</th>
+                <th scope="col">Akcja</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dish of this.dishes; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ dish.name }}</td>
+                <td>{{ dish.cuisineType }}</td>
+                <td>{{ dish.category }}</td>
+                <td>{{ dish.maxPerDay | number }}</td>
+                <td>{{ dish.price| number }}{{currencyService.currency}}</td>
+                <td class="buttons">
+                    <button (click)="editDish(dish)" class="custom-btn">Edytuj</button>
+                    <button (click)="deleteDish(dish)" class="custom-btn">Usuń</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="buttons">
+        <button class="custom-btn" routerLink="/dish-form">Dodaj danie</button>
+        <a class="custom-btn" routerLink="/dish-list">Wróć do listy dań</a>
+    </div>
+</div>

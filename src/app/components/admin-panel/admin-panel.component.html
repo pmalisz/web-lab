@@ -1,1 +1,35 @@
-<p>admin-panel works!</p>
+<div class="content">
+    <div class="persistance">
+        <label for="persistance">Persistance:</label>
+        <select (change)="onSelectPersistance()" name="persistance" id="persistance" class="form-control" [(ngModel)]="persistance">
+            <option value="local">LOCAL</option>
+            <option value="session">SESSION</option>
+            <option value="none">NONE</option>
+        </select>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">Czy zbanowany</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ user.email }}</td>
+                <td class="roles">
+                    <div>Użytkownik: <input class="form-check-input" type="checkbox" [(ngModel)]="user.roles.customer" (click)="setCustomer(user, user.roles.customer)"></div>
+                    <div>Manager: <input class="form-check-input" type="checkbox" [(ngModel)]="user.roles.manager" (click)="setManager(user, user.roles.manager)"></div>
+                    <div>Admin: <input class="form-check-input" type="checkbox" [(ngModel)]="user.roles.admin" (click)="setAdmin(user, user.roles.admin)"></div>
+                </td>
+                <td>
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="user.banned" (click)="banOrUnban(user.id, user.banned)">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

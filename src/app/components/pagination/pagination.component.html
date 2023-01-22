@@ -1,0 +1,23 @@
+<div class="paginator">
+  <div class="page-slider">
+    <button class="slider" (click)="onSwipeLeft()" [disabled]="currentPage == 1">
+      <i class="fa fa-caret-left"></i>
+    </button>
+    <span>{{ currentPage }}</span>
+    <button class="slider" (click)="onSwipeRight()" [disabled]="currentPage >= itemsCount / pageSize">
+      <i class="fa fa-caret-right"></i>
+    </button>
+  </div>
+  
+  <div class="page-sizer">
+    <label for="pageSize">Rozmiar strony:</label>
+    <select (change)="onSelectPageSize()" name="pageSize" id="pageSize" class="form-control" [(ngModel)]="pageSize">
+      <option value="4">4</option>
+      <option value="8">8</option>
+      <option value="16">16</option>
+      <option value="32">32</option>
+      <option value="64">64</option>
+      <option [value]="itemsCount">Wszystko</option>
+    </select>
+  </div>
+</div>

@@ -6,6 +6,7 @@
             <a class="next" (click)="next()">❯</a>
         </div>
         <div class="dish-view-body">
+            <ngb-rating [max]="5" [(rate)]="dish.rate" [readonly]="!canRate" (rateChange)="changeRate()"></ngb-rating>
             <h1>{{dish.name | uppercase}}</h1>
             <p>{{dish.description}}</p>
             <ul>
@@ -28,5 +29,9 @@
                 <p>Wybrano: {{dish.maxPerDay - dish.remaining}}</p>
             </div>
         </div>
+    </div>
+
+    <div class="go-back">
+        <a class="custom-btn" routerLink="/dish-list" routerLinkActive="active">Wróć do listy dań</a>
     </div>
 </div>

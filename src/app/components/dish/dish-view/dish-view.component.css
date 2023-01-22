@@ -1,7 +1,9 @@
 .dish-view-container {
     margin: 2rem;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
 }
 
 .dish-view {
@@ -12,6 +14,7 @@
     border-radius: .4rem .4rem;
     box-shadow: .2rem .2rem .6rem .2rem #aaaaaa;
     background-color: whitesmoke;
+    transition: 1s;
 }
 
 .dish-view-img {
@@ -59,7 +62,7 @@
 
 .dish-view-body {
     text-align: center;
-    height: 50%;
+    height: 55%;
     padding: 1rem;
     overflow-y: auto;
 }
@@ -93,7 +96,7 @@ hr {
 }
 
 .dish-view-footer {
-    height: 15%;
+    height: 10%;
     border-radius: 0 0 .4rem .4rem;
     display: flex;
     align-items: center;
@@ -107,28 +110,34 @@ hr {
 }
 
 .square-btn {
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 3rem;
+    width: 3rem;
 }
 
 .dish-view-footer-info {
     text-align: right;
     color: #666666;
-}
-
-.small-amount{
-    background-color: rgb(252, 211, 211);
-}
-
-.max-price{
-    border: .3rem solid green;
-}
-
-.min-price{
-    border: .3rem solid red;
+    font-size: 1.6rem;
 }
 
 ngb-rating {
     color: #FFC107;
-    font-size: 2rem;
+    font-size: 3rem;
+}
+
+.go-back a {
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 992px) {
+    .dish-view {
+        width: 40rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .dish-view {
+        width: 25rem;
+    }
 }

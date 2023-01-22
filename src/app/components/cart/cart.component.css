@@ -1,3 +1,9 @@
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .total-price {
     display: flex;
     justify-content: center;
@@ -8,5 +14,16 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
-    margin: 1rem;
+    margin: 2rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+}
+
+a, button {
+    padding: 1rem;
+    font-size: 1.2rem;
 }

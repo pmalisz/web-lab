@@ -42,7 +42,7 @@ export class DishFilterComponent {
       allowSearchFilter: true,
     }
     
-    this.dishService.dishesLoaded.subscribe(dishes => {
+    this.dishService.dishesSubject.subscribe(dishes => {
       this.updateObjects(dishes);
     })
   }

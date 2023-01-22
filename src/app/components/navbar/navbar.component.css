@@ -1,23 +1,32 @@
-#navbar {
-    display: flex;
-    justify-content:space-between;
-    margin-bottom: 1rem;
+.navbar {
     position: sticky;
     top: 0px;
     z-index: 1;
-    background-color: #e4dfda;
+    background-color: rgb(255, 110, 110) !important; /*rgb(255, 110, 110)*/
 }
 
-.logo {
-    display: flex;
+.navbar-collapse {
+    background-color: rgb(255, 110, 110) !important;
 }
 
-button {
+.navbar-toggler {
+    color: whitesmoke;
+}
+
+.navbar-brand {
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.nav-link {
+    color: whitesmoke !important;
     font-size: 1.2rem;
-    width: 7rem;
+    font-weight: bold;
+    transition: .5s;
 }
 
-.buttons, .logo{
-    gap: .5rem;
-    display: flex;
+.nav-link:hover {
+    font-size: 1.3rem;
+    color:blanchedalmond !important;
 }

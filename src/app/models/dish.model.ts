@@ -1,5 +1,3 @@
-import { Rate } from "./rate.model";
-
 export interface Dish {
     id?:string,
     name:string,
@@ -11,6 +9,5 @@ export interface Dish {
     price:number,
     description:string,
     imgUrls:string[],
-    rating?:Rate[],
-    rate?:number|string;
+    rate:number;
 }

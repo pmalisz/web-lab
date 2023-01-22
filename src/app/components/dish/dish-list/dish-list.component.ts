@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Dish } from 'src/app/models/dish.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { CurrencyService } from 'src/app/services/currency.service';
 import { DishService } from 'src/app/services/dish.service';
 import { FilterService } from 'src/app/services/filter.service';
+import { PaginationService } from 'src/app/services/pagination.service';
 
 @Component({
   selector: 'app-dish-list',
@@ -11,12 +13,15 @@ import { FilterService } from 'src/app/services/filter.service';
   styleUrls: ['./dish-list.component.css']
 })
 export class DishListComponent {
-  dishes:Dish[] = [];
-  filterSubscription!:Subscription;
-  dishLoadedSubscription!: Subscription;
+  dishes!: Dish[];
+  dishesOnPage!: Dish[];
+  subscriptions: Subscription;
   maxDishPrice!: number;
   minDishPrice!: number;
   orderedCount!: number;
+
+  pageSize!: number;
+  currentPage!:number;
 
   dishAttributes = {
     cuisineType: new Set,
@@ -25,38 +30,44 @@ export class DishListComponent {
     rate: new Set
   }
 
-  pageSize: number = 8;
-  currentPage:number = 1;
-  currentPageRange: [number, number] = [
-    this.pageSize * (this.currentPage - 1),
-     this.pageSize * this.currentPage
-    ];
-
-  constructor(public dishService: DishService, public currencyService: CurrencyService, public filterService: FilterService) {
-
+  constructor(private dishService: DishService, 
+              public currencyService: CurrencyService, 
+              private filterService: FilterService, 
+              public paginationService: PaginationService,
+              public authService: AuthService) {
+    this.subscriptions = new Subscription();
   }
 
   ngOnInit(){
-    this.dishLoadedSubscription = this.dishService.dishesLoaded.subscribe((dishes) => {
+    this.subscriptions.add(this.dishService.dishesSubject.subscribe(dishes => {
       this.dishes = dishes;
-    });
-
-    this.getDishPrices();
+      this.setDishesOnPage();
+      this.getDishPrices();
+      this.paginationService.setItemsCount(this.dishes.length);
+    }));
     
-    this.dishService.orderedCount.subscribe(oc => {
+    this.subscriptions.add(this.dishService.orderedCount.subscribe(oc => {
       this.orderedCount = oc;
-    })
+    }));
 
-    this.filterSubscription = this.filterService.filterChanged.subscribe(
-      (newFilters) => {
+    this.subscriptions.add(this.filterService.filterChanged.subscribe(newFilters => {
         this.dishAttributes = newFilters;
       }
-    );
+    ));
+
+    this.subscriptions.add(this.paginationService.currentPageSubject.subscribe(currentPage => {
+      this.currentPage = currentPage;
+      this.setDishesOnPage();
+    }))
+
+    this.subscriptions.add(this.paginationService.pageSizeSubject.subscribe(pageSize => {
+      this.pageSize = pageSize;
+      this.setDishesOnPage();
+    }))
   }
 
   ngOnDestroy(): void {
-    this.filterSubscription.unsubscribe();
-    this.dishLoadedSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   private getDishPrices() :void {    
@@ -68,27 +79,8 @@ export class DishListComponent {
     });
   }
 
-  isInPage(i:number) {
-    return i >= this.currentPageRange[0] && i < this.currentPageRange[1];
-  }
-
-  onSwipeRight() {
-    this.currentPage += 1;
-    this.currentPageRange[0] += this.pageSize;
-    this.currentPageRange[1] += this.pageSize;    
-  }
-
-  onSwipeLeft() {
-    this.currentPage -= 1;
-    this.currentPageRange[0] -= this.pageSize;
-    this.currentPageRange[1] -= this.pageSize;
-  }
-
-  onSelectPageSize() {
-    this.pageSize = +this.pageSize; //convert to number because in <option> tag string is being held
-    this.currentPageRange = [
-    this.pageSize * (this.currentPage - 1),
-     this.pageSize * this.currentPage
-    ];
+  private setDishesOnPage(){
+    this.dishesOnPage = this.dishes.filter((_, idx) => idx >= (this.currentPage-1)*this.pageSize);
+    this.dishesOnPage = this.dishesOnPage.filter((u, i) => i < this.pageSize);
   }
 }
